@@ -10,7 +10,7 @@ class UserModel extends Model
     protected $primaryKey = 'id';
 
     // Champs permis pour les opérations d'insertion et de mise à jour
-    protected $allowedFields = ['username', 'email', 'password', 'id_permission', 'created_at', 'updated_at', 'deleted_at'];
+    protected $allowedFields = ['username', 'name', 'firstname', 'score',   'bio', 'email', 'password', 'id_permission', 'id_school', 'created_at', 'updated_at', 'deleted_at'];
 
     // Activer le soft delete
     protected $useSoftDeletes = true;

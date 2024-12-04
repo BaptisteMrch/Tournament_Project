@@ -18,6 +18,11 @@
         "url": "/admin/user",
         "icon": "<i class=\"nav-icon fa-solid fa-users\"></i>"
       },
+      "school": {
+        "title": "Ecole",
+        "url": "/admin/school",
+        "icon": "<i class=\"nav-icon fa-solid fa-school\"></i>"
+      },
       "userpermission": {
         "title": "Permissions",
         "url": "/admin/userpermission",

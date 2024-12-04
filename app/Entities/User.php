@@ -10,6 +10,11 @@ class User extends Entity
     protected $attributes = [
         'id'            => null,
         'username'      => null,
+        'name'          => null,
+        'firstname'     => null,
+        'score'         => null,
+        'bio'           => null,
+        'id_school'     => null,
         'email'         => null,
         'password'      => null,
         'id_permission' => null,
