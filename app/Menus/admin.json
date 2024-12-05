@@ -6,6 +6,35 @@
     "icon": "<i class=\"nav-icon fa-solid fa-house\"></i>",
     "class": "main-menu-accueil"
   },
+  "userschool": {
+    "title": "Ecole",
+    "url": "/admin/userschool",
+    "icon": "<i class=\"fa-solid fa-school nav-icon\"></i>"
+  },
+  "categoryschool": {
+    "title": "Categories Ecole",
+    "url": "/admin/categoryschool",
+    "icon": "<i class=\"fa-solid fa-school nav-icon\"></i>"
+  },
+  "categorygame": {
+    "title": "categories / jeux",
+    "url": "/user",
+    "perm": "none",
+    "icon": "<i class=\"fa-solid fa-list nav-icon\"></i>",
+    "class": "",
+    "subs": {
+      "game": {
+        "title": "Jeux",
+        "url": "/admin/game",
+        "icon": "<i class=\"fa-solid fa-gamepad nav-icon\"></i>"
+      },
+      "categorygame": {
+        "title": "Categories de jeux",
+        "url": "/admin/categorygame",
+        "icon": "<i class=\"fa-solid fa-gamepad nav-icon\"></i>"
+      }
+    }
+  },
   "produits": {
     "title": "Options",
     "url": "/user",
@@ -23,6 +52,7 @@
         "url": "/admin/userpermission",
         "icon": "<i class=\"nav-icon fa-solid fa-user-gear\"></i>"
       }
+
     }
   }
 }
