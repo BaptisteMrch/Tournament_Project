@@ -4,13 +4,13 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class SchoolModel extends Model
+class GameModel extends Model
 {
-    protected $table = 'school';
+    protected $table = 'game';
     protected $primaryKey = 'id';
 
     // Champs permis pour les opérations d'insertion et de mise à jour
-    protected $allowedFields = ['name', 'city', 'score','id_category','created_at', 'updated_at', 'deleted_at'];
+    protected $allowedFields = ['name', 'id_category','created_at', 'updated_at', 'deleted_at'];
 
     // Activer le soft delete
     protected $useSoftDeletes = true;
@@ -24,7 +24,6 @@ class SchoolModel extends Model
     // Validation
     protected $validationRules = [
         'name' => 'required|is_unique[school.name,id,{id}]|min_length[3]|max_length[100]',
-        'city' => 'required|min_length[3]|max_length[100]',
     ];
 
     protected $validationMessages = [
@@ -34,50 +33,44 @@ class SchoolModel extends Model
             'max_length' => 'Le nom d\'ecole ne doit pas dépasser 100 caractères.',
             'is_unique'   => 'Ce nom d\'ecole est déja utilisé.',
         ],
-        'city' => [
-            'required'   => 'Le nom de la ville est requis.',
-            'min_length' => 'Le nom de la ville doit comporter au moins 3 caractères.',
-            'max_length' => 'Le nom de la ville ne doit pas dépasser 100 caractères.',
-        ],
     ];
 
     // Relations avec les permissions
     public function getCategory()
     {
-        return $this->join('school_category', 'school.id_category = school_category.id')
-            ->select('school.*, school_category.name as category_name')
+        return $this->join('game_category', 'game.id_category = game_category.id')
+            ->select('game.*, game_category.name as category_name')
             ->findAll();
     }
 
-    public function getSchoolById($id)
+    public function getGameById($id)
     {
         return $this->find($id);
     }
-    public function getAllSchools()
+    public function getAllGames()
     {
         return $this->findAll();
     }
 
-    public function createSchool($data)
+    public function createGame($data)
     {
         return $this->insert($data);
     }
-    public function updateSchool($id, $data)
+    public function updateGame($id, $data)
     {
         return $this->update($data);
     }
-    public function deleteSchool($id)
+    public function deleteGame($id)
     {
         return $this->delete($id);
     }
 
-    public function getPaginatedSchool($start, $length, $searchValue, $orderColumnName, $orderDirection)
+    public function getPaginatedGame($start, $length, $searchValue, $orderColumnName, $orderDirection)
     {
-        $builder = $this->table('school');
+        $builder = $this->table('game');
         // Recherche
         if ($searchValue != null) {
             $builder->like('name', $searchValue);
-            $builder->orLike('city', $searchValue);
         }
 
         // Tri
@@ -90,19 +83,18 @@ class SchoolModel extends Model
         return $builder->get()->getResultArray();
     }
 
-    public function getTotalSchool()
+    public function getTotalGame()
     {
-        $builder = $this->table('school');
+        $builder = $this->table('game');
         return $builder->countAllResults();
     }
 
-    public function getFilteredSchool($searchValue)
+    public function getFilteredGame($searchValue)
     {
-        $builder = $this->table('school');
+        $builder = $this->table('game');
         // @phpstan-ignore-next-line
         if (! empty($searchValue)) {
             $builder->like('name', $searchValue);
-            $builder->orLike('city', $searchValue);
         }
 
         return $builder->countAllResults();
