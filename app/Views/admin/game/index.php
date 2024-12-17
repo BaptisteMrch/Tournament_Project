@@ -4,19 +4,6 @@
         <a href="<?= base_url('/admin/game/new'); ?>"><i class="fa-solid fa-user-plus"></i></a>
     </div>
     <div class="card-body">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="profil-tab" data-bs-toggle="tab" data-bs-target="#profil"
-                        type="button" role="tab" aria-controls="profil" aria-selected="true">Écoles
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="onglet-tab" data-bs-toggle="tab"
-                        data-bs-target="#onglet" type="button" role="tab" aria-controls="onglet"
-                        aria-selected="false">Catégories
-                </button>
-            </li>
-        </ul>
         <table class="table table-hover">
             <thead>
             <tr>
@@ -29,24 +16,15 @@
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($schools as $school): ?>
+            <?php foreach ($games as $game): ?>
                 <tr>
-                    <td><?= $school['id']; ?></td>
-                    <td><?= $school['name']; ?></td>
-                    <td><?= $school['city']; ?></td>
-                    <td><a href="<?= base_url('/admin/school/' . $school['id']); ?>"> <i
+                    <td><?= $game['id']; ?></td>
+                    <td><?= $game['name']; ?></td>
+                    <td><a href="<?= base_url('/admin/game/' . $game['id']); ?>"> <i
                                 class="fa-solid fa-pen"></i></a></td>
-                    <td> <?= $school['deleted_at'] === null ? '<span class="text-success">Actif</span>' : '<span class="text-danger">Supprimé</span>'; ?></td>
-                    <td> <?php if ($school['deleted_at'] === null): ?>
-                            <!-- Bouton pour désactiver -->
-                            <a href="<?= base_url("admin/school/deactivate/{$school['id']}"); ?>" title="Désactiver"><i
-                                    class="fa-solid fa-toggle-on text-success"></i></a>
-                        <?php else: ?>
-                            <!-- Bouton pour activer -->
-                            <a href="<?= base_url("admin/school/activate/{$school['id']}"); ?>" title="Activer"><i
-                                    class="fa-solid fa-toggle-off text-danger"></i></a>
-                        <?php endif; ?>
-                    </td>
+                    <td><a href="<?= base_url('/admin/game/delete/' . $game['id']); ?>"> <i
+                                    class="fa-solid fa-pen"></i></a></td>
+                    <td> <?= $game['deleted_at'] === null ? '<span class="text-success">Actif</span>' : '<span class="text-danger">Supprimé</span>'; ?></td>
                 </tr>
             <?php endforeach ?>
             </tbody>

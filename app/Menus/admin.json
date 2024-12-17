@@ -13,39 +13,20 @@
     "icon": "<i class=\"nav-icon fa-solid fa-gear\"></i>",
     "class": "main-menu-accueil",
     "subs": {
-      "user": {
-        "title": "Catégories de Jeu",
-        "url": "/admin/Categorygame",
-        "icon": "<i class=\"nav-icon fa-solid fa-list\"></i>"
-      },
-      "userpermission": {
+      "game": {
         "title": "Jeux",
         "url": "/admin/game",
         "icon": "<i class=\"nav-icon fa-solid fa-gamepad\"></i>"
-      }
-    }
-  },
-  "tournament": {
-    "title": "Gestion des tournois",
-    "url": "/admin/game",
-    "perm": "none",
-    "icon": "<i class=\"nav-icon fa-solid fa-trophy\"></i>",
-    "class": "",
-    "subs": {
-      "user": {
-        "title": "S'inscrire",
-        "url": "/admin/user",
-        "icon": "<i class=\"nav-icon fa-solid fa-envelope\"></i>"
       },
-      "userpermission": {
-        "title": "Regarder",
-        "url": "/admin/userpermission",
-        "icon": "<i class=\"nav-icon fa-solid fa-eye\"></i>"
+      "gamecategory ": {
+        "title": "Catégories de Jeu",
+        "url": "/admin/Categorygame",
+        "icon": "<i class=\"nav-icon fa-solid fa-list\"></i>"
       }
     }
   },
-  "produits": {
-    "title": "Paramètre admin",
+  "user": {
+    "title": "Gestion Utilisateurs",
     "url": "/user",
     "perm": "none",
     "icon": "<i class=\"nav-icon fa-solid fa-gear\"></i>",
@@ -60,16 +41,25 @@
         "title": "Permissions",
         "url": "/admin/userpermission",
         "icon": "<i class=\"nav-icon fa-solid fa-user-gear\"></i>"
+      }
+    }
+  },
+  "produits": {
+    "title": "Gestion des Écoles",
+    "url": "/user",
+    "perm": "none",
+    "icon": "<i class=\"nav-icon fa-solid fa-gear\"></i>",
+    "class": "",
+    "subs": {
+      "school": {
+        "title": "École",
+        "url": "/admin/school",
+        "icon": "<i class=\"nav-icon fa-solid fa-school\"></i>"
       },
       "category": {
         "title": "Catégorie",
         "url": "/admin/categoryschool",
         "icon": "<i class=\"nav-icon fa-solid fa-list\"></i>"
-      },
-      "school": {
-        "title": "École",
-        "url": "/admin/school",
-        "icon": "<i class=\"nav-icon fa-solid fa-school\"></i>"
       }
     }
   }

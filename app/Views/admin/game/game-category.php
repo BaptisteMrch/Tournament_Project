@@ -7,7 +7,6 @@
                     <h4 class="card-title"> <?= isset($category) ? "Editer " . $category['name'] : "Créer une Catégorie" ?></h4>
                 </div>
                 <div class="card-body">
-                    <!-- Tab panes -->
                     <div class="tab-content border p-3">
                         <div class="tab-pane active" id="profil" role="tabpanel" aria-labelledby="profil-tab"
                              tabindex="0">
