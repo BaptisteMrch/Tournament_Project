@@ -1,4 +1,3 @@
-<?php print_r("TEST") ?>
 <div class="row">
     <div class="col">
         <form action="<?= isset($ecole) ? base_url("/admin/school/update") : base_url("/admin/school/create") ?>" method="POST" enctype="multipart/form-data">
