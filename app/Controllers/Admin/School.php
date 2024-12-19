@@ -13,19 +13,19 @@ class School extends BaseController
     public function getindex($id = null) {
 
         $sm = Model("SchoolModel");
-        if ($id == null) {
+        $categories = Model("CategorySchoolModel")->getAllCategories();
+        $schools = $sm->withDeleted()->getSchoolById($id);
 
-            return $this->view("/admin/school/index.php",[], true);
+        if ($id == null) {
+            return $this->view("/admin/school/index.php",["schools" => $schools,], true);
         } else {
-            $permissions = Model("UserPermissionModel")->getAllPermissions();
             if ($id == "new") {
                 $this->addBreadcrumb('Création d\' une école','');
-                return $this->view("/admin/school/school",["permissions" => $permissions], true);
+                return $this->view("/admin/school/school",["schools" => $schools,"categories" => $categories], true);
             }
-            $ecole = $sm->getUserById($id);
-            if ($ecole) {
-                $this->addBreadcrumb('Modification de ' . $ecole['name'], '');
-                return $this->view("/admin/school/school", ["utilisateur" => $ecole, "permissions" => $permissions ], true);
+            if ($schools) {
+                $this->addBreadcrumb('Modification de ' . $schools['name'], '');
+                return $this->view("/admin/school/school", ["schools" => $schools, "categories" => $categories ], true);
             } else {
                 $this->error("L'ID de l'école n'existe pas");
                 $this->redirect("/admin/school");
@@ -115,5 +115,25 @@ class School extends BaseController
             'data'            => $data,
         ];
         return $this->response->setJSON($result);
+    }
+
+    public function getdeactivate($id){
+        $um = Model('SchoolModel');
+        if ($um->deleteSchool($id)) {
+            $this->success("École désactivé");
+        } else {
+            $this->error("École non désactivé");
+        }
+        $this->redirect('/admin/school');
+    }
+
+    public function getactivate($id){
+        $um = Model('schoolModel');
+        if ($um->activateSchool($id)) {
+            $this->success("École activé");
+        } else {
+            $this->error("École non activé");
+        }
+        $this->redirect('/admin/school');
     }
 }

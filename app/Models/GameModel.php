@@ -35,14 +35,6 @@ class GameModel extends Model
         ],
     ];
 
-    // Relations avec les permissions
-    public function getCategory()
-    {
-        return $this->join('game_category', 'game.id_category = game_category.id')
-            ->select('game.*, game_category.name as category_name')
-            ->findAll();
-    }
-
     public function getGameById($id)
     {
         return $this->find($id);
@@ -58,7 +50,10 @@ class GameModel extends Model
     }
     public function updateGame($id, $data)
     {
-        return $this->update($data);
+        $builder = $this->builder();
+        $data['updated_at'] = ('Y-m-d H:i:s');
+        $builder->where('id', $id);
+        return $builder->update($data);
     }
     public function deleteGame($id)
     {
@@ -98,5 +93,12 @@ class GameModel extends Model
         }
 
         return $builder->countAllResults();
+    }
+
+    public function activateGame($id) {
+        $builder = $this->builder();
+        $builder->set('deleted_at', NULL);
+        $builder->where('id', $id);
+        return $builder->update();
     }
 }

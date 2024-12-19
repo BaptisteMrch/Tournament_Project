@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h4>Liste des Jeux</h4>
-        <a href="<?= base_url('/admin/game/new'); ?>"><i class="fa-solid fa-user-plus"></i></a>
+        <a href="<?= base_url('/admin/game/new'); ?>"><i class="fa-solid fa-plus"></i></a>
     </div>
     <div class="card-body">
         <table class="table table-hover">
@@ -9,10 +9,9 @@
             <tr>
                 <th>ID</th>
                 <th>Nom</th>
-                <th>Ville</th>
+                <th>Catégorie</th>
                 <th>Modifier</th>
                 <th>Status</th>
-                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -20,11 +19,10 @@
                 <tr>
                     <td><?= $game['id']; ?></td>
                     <td><?= $game['name']; ?></td>
+                    <td><?= $game['id_category']; ?></td>
                     <td><a href="<?= base_url('/admin/game/' . $game['id']); ?>"> <i
                                 class="fa-solid fa-pen"></i></a></td>
-                    <td><a href="<?= base_url('/admin/game/delete/' . $game['id']); ?>"> <i
-                                    class="fa-solid fa-pen"></i></a></td>
-                    <td> <?= $game['deleted_at'] === null ? '<span class="text-success">Actif</span>' : '<span class="text-danger">Supprimé</span>'; ?></td>
+                    <td>    <?= ($game['deleted_at'] === null) ?        "<a title='Désactiver le jeu' href='" . base_url("admin/game/deactivate/{$game['id']}") . "'><i class='fa-solid fa-xl fa-toggle-on text-success'></i></a>" :        "<a title='Activer le jeu' href='" . base_url("admin/game/activate/{$game['id']}") . "'><i class='fa-solid fa-toggle-off fa-xl text-danger'></i></a>";    ?></td>
                 </tr>
             <?php endforeach ?>
             </tbody>
