@@ -20,7 +20,7 @@
       },
       "gamecategory ": {
         "title": "Catégories de Jeu",
-        "url": "/admin/Categorygame",
+        "url": "/admin/categorygame",
         "icon": "<i class=\"nav-icon fa-solid fa-list\"></i>"
       }
     }
@@ -44,7 +44,7 @@
       }
     }
   },
-  "produits": {
+  "schools": {
     "title": "Gestion des Écoles",
     "url": "/user",
     "perm": "none",

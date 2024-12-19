@@ -41,14 +41,6 @@ class SchoolModel extends Model
         ],
     ];
 
-    // Relations avec les permissions
-    public function getCategory()
-    {
-        return $this->join('school_category', 'school.id_category = school_category.id')
-            ->select('school.*, school_category.name as category_name')
-            ->findAll();
-    }
-
     public function getSchoolById($id)
     {
         return $this->find($id);
@@ -64,7 +56,10 @@ class SchoolModel extends Model
     }
     public function updateSchool($id, $data)
     {
-        return $this->update($data);
+        $builder = $this->builder();
+        $data['updated_at'] = ('Y-m-d H:i:s');
+        $builder->where('id', $id);
+        return $builder->update($data);
     }
     public function deleteSchool($id)
     {
@@ -106,5 +101,12 @@ class SchoolModel extends Model
         }
 
         return $builder->countAllResults();
+    }
+
+    public function activateSchool($id) {
+        $builder = $this->builder();
+        $builder->set('deleted_at', NULL);
+        $builder->where('id', $id);
+        return $builder->update();
     }
 }

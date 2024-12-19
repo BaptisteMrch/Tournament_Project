@@ -4,10 +4,10 @@ namespace App\Controllers;
 
 class Home extends BaseController
 {
-    protected $require_auth = false;
+    protected $require_auth = true;
     public function index(): string
     {
-        return view('welcome_message');
+        return view('/front/user/index');
     }
 
     public function getforbidden() : string
