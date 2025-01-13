@@ -62,6 +62,20 @@
         "icon": "<i class=\"nav-icon fa-solid fa-list\"></i>"
       }
     }
+  },
+  "tournament": {
+    "title": "Gestion des Tournois",
+    "url": "/admin/tournament",
+    "perm": "none",
+    "icon": "<i class=\"nav-icon fa-solid fa-gear\"></i>",
+    "class": "main-menu-accueil",
+    "subs": {
+      "create": {
+        "title": "Tournois",
+        "url": "/admin/tournament",
+        "icon": "<i class=\"nav-icon fa-solid fa-trophy\"></i>"
+      }
+    }
   }
 }
 
