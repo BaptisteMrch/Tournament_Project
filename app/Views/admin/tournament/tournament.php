@@ -111,3 +111,13 @@
         </form>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#id_game').select2({
+            theme: 'bootstrap-5',
+            placeholder: 'Rechercher un jeu',
+            allowClear: true
+        })
+    });
+</script>

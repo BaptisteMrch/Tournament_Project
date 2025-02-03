@@ -10,25 +10,44 @@ class Tournament extends BaseController
     public function getindex()
     {
         $tm = Model("TournamentModel");
+        $pm = model("ParticipantModel");
+
         $tournaments = $tm->getTournamentsWithGameNameFront();
-        return $this->view('/front/tournament/index.php', ["tournaments" => $tournaments]);
+        $participants = $pm->getParticipantWithUser();
+
+        return $this->view('/front/tournament/index.php', ["tournaments" => $tournaments, "participants" => $participants]);
+
     }
 
-    public function postregister()
+    public function getregister()
     {
-        $session = session();
         $pm = Model("ParticipantModel");
 
-        $id_tournament = $this->request->getPost('id_tournament');
-        $id_user = $this->request->getPost('id_user');
+        $id_tournament = $this->request->getGet('id_tournament');
+        $id_user = $this->request->getGet('id_user');
 
-        if ($pm->insertParticipant($id_tournament, $id_user)) {
-            return redirect()->back()->with('success', 'Inscription réussie !');
+        $newParticipantId = $pm->insertParticipant($id_tournament, $id_user);
+        if ($newParticipantId) {
+            $this->success("Le participant à bien été inscrit au tournoi");
+            $this->redirect('/tournament');
         } else {
-            return redirect()->back()->with('error', 'Vous êtes déjà inscrit à ce tournoi.');
+            $errors = $pm->errors();
+            foreach ($errors as $error) {
+                $this->error($error);
+            }
+            $this->redirect('/tournament');
         }
+    }
+
+    public function getunregister()
+    {
+        $pm = Model("ParticipantModel");
+
+        $id_tournament = $this->request->getGet('id_tournament');
+        $id_user = $this->request->getGet('id_user');
+
+        $pm->unregisterParticipant($id_tournament, $id_user);
 
         $this->redirect('/tournament');
     }
-
 }

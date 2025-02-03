@@ -13,19 +13,18 @@ class Tournament extends BaseController
 
     public function getindex($id = null)
     {
-        $tm = Model("TournamentModel");
+        $tournaments = Model("TournamentModel")->getTournamentsWithGameName();
+        $tournament = Model("TournamentModel")->getTournamentById($id);
+        $participants = Model("ParticipantModel")->getParticipantsByTournament($id);
+        $nbParticipant = Model("TournamentModel")->getTournamentsWithParticipants();
         $games = Model("GameModel")->getAllGames();
-        $tournaments = $tm->getTournamentsWithGameName();
-        $tournament = $tm->getTournamentById($id);
-        $pm = Model("ParticipantModel");
-        $participants = $pm->getParticipantWithUser();
 
         if ($id == null) {
-            return $this->view('/admin/tournament/index.php',["tournaments" => $tournaments, "games" => $games], true);
+            return $this->view('/admin/tournament/index.php',["tournaments" => $tournaments, "games" => $games, "nbParticipant" => $nbParticipant], true);
         } else {
             if ($id == "new") {
                 $this->addBreadcrumb('Création d\'un tournois','');
-                return $this->view("/admin/tournament/tournament",["tournament" => $tournament, "games" => $games], true);
+                return $this->view("/admin/tournament/tournament",["tournament" => $tournament, "games" => $games, "participants" => $participants], true);
             }
             if ($tournaments) {
                 $this->addBreadcrumb('Modification de ' . $tournament['name'], '');
@@ -41,10 +40,10 @@ class Tournament extends BaseController
         // Récupération des données envoyées via POST
         $data = $this->request->getPost();
 
-        // Récupération du modèle UserModel
+        // Récupération du modèle TournamentModel
         $tm = Model("TournamentModel");
 
-        // Mise à jour des informations utilisateur dans la base de données
+        // Mise à jour des informations tournoi dans la base de données
         if ($tm->updateTournament($data['id'], $data)) {
             // Si la mise à jour réussit
             $this->success("Le tournois a bien été modifié.");
@@ -65,11 +64,11 @@ class Tournament extends BaseController
         $data = $this->request->getPost();
         $tm = Model("tournamentModel");
 
-        // Créer l'utilisateur et obtenir son ID
-        $newSchoolId = $tm->createTournament($data);
+        // Créer le tournoi et obtenir son ID
+        $newTournamentId = $tm->createTournament($data);
 
         // Vérifier si la création a réussi
-        if ($newSchoolId) {
+        if ($newTournamentId) {
             $this->success("Le tournois à bien été ajouté.");
             $this->redirect("/admin/tournament");
         } else {
@@ -91,10 +90,12 @@ class Tournament extends BaseController
         $this->redirect('/admin/tournament');
     }
 
-    public function getdeleteparticipant(){
-        $id_user = $this->get('id_user');
-        $id_tournament = $this->get('id_tournament');
-        $tm = Model('participantModel');
+    public function getdeleteparticipant() {
+        $tm = model('ParticipantModel');
+
+        $id_user = $this->request->getGet('id_user');
+        $id_tournament = $this->request->getGet('id_tournament');
+
         if ($tm->deleteParticipant($id_tournament, $id_user)) {
             $this->success("Participant supprimé");
         } else {
@@ -103,9 +104,10 @@ class Tournament extends BaseController
         $this->redirect('/admin/tournament');
     }
 
+
     public function getdeactivate($id){
-        $um = Model('TournamentModel');
-        if ($um->deleteTournament($id)) {
+        $tm = Model('TournamentModel');
+        if ($tm->deleteTournament($id)) {
             $this->success("Tournoi désactivé");
         } else {
             $this->error("Tournoi non désactivé");
@@ -114,8 +116,8 @@ class Tournament extends BaseController
     }
 
     public function getactivate($id){
-        $um = Model('TournamentModel');
-        if ($um->activateTournament($id)) {
+        $tm = Model('TournamentModel');
+        if ($tm->activateTournament($id)) {
             $this->success("Tournoi activé");
         } else {
             $this->error("Tournoi non activé");
