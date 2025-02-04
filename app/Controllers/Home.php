@@ -9,12 +9,13 @@ class Home extends BaseController
     protected $title      = 'Tableau de Bord';
     protected $require_auth = true;
 
-    public function index(): string
+    public function index()
+
     {
         return $this->view('/front/dashboard/index.php');
     }
 
-    public function getforbidden() : string
+    public function getforbidden()
     {
         return view('/templates/forbidden');
     }

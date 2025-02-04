@@ -10,10 +10,11 @@
                 <th>ID</th>
                 <th>Nom</th>
                 <th>Jeu</th>
-                <th>Nombres de places</th>
+                <th>Nombres de Places</th>
                 <th>Date de Début</th>
                 <th>Date de Fin</th>
                 <th>Modifier</th>
+                <th>Status</th>
             </tr>
             </thead>
             <tbody>
@@ -22,11 +23,12 @@
                     <td><?= $tournament['id']; ?></td>
                     <td><?= $tournament['name']; ?></td>
                     <td><?= $tournament['game_name']; ?></td>
-                    <td><?= $tournament['nb_player']; ?></td>
+                    <td><?= $tournament['nb_participants']; ?>/<?= $tournament['nb_player']; ?></td>
                     <td><?= $tournament['date_start']; ?></td>
                     <td><?= $tournament['date_end']; ?></td>
                     <td><a href="<?= base_url('/admin/tournament/' . $tournament['id']); ?>"> <i
                                 class="fa-solid fa-pen"></i></a></td>
+                    <td>    <?= ($tournament['deleted_at'] === null) ?        "<a title='Désactiver le tournoi' href='" . base_url("admin/tournament/deactivate/{$tournament['id']}") . "'><i class='fa-solid fa-xl fa-toggle-on text-success'></i></a>" :        "<a title='Activer le tournoi' href='" . base_url("admin/tournament/activate/{$tournament['id']}") . "'><i class='fa-solid fa-toggle-off fa-xl text-danger'></i></a>";    ?></td>
                      </tr>
             <?php endforeach ?>
             </tbody>

@@ -10,7 +10,9 @@ class TournamentModel extends Model
     protected $primaryKey = 'id';
 
     // Champs permis pour les opérations d'insertion et de mise à jour
-    protected $allowedFields = ['name','id_game','created_at', 'updated_at', 'deleted_at'];
+
+    protected $allowedFields = ['name','nb_player','date_start','date_end','id_game','created_at', 'updated_at', 'deleted_at'];
+
 
     // Activer le soft delete
     protected $useSoftDeletes = true;
@@ -23,7 +25,7 @@ class TournamentModel extends Model
 
     // Validation
     protected $validationRules = [
-        'name' => 'required|is_unique[tournament.name,id,{id}]|min_length[3]|max_length[100]',
+        'name' => 'required|min_length[3]|max_length[100]'
     ];
 
     protected $validationMessages = [
@@ -117,4 +119,14 @@ class TournamentModel extends Model
         return $builder->get()->getResultArray(); // Récupère les résultats sous forme de tableau associatif
     }
 
+
+    public function getTournamentsWithGameNameFront()
+    {
+        $builder = $this->db->table('tournament');
+        $builder->select('tournament.*, game.name as game_name');
+        $builder->join('game', 'game.id = tournament.id_game', 'left'); // Jointure entre tournament et game
+        $builder->where('tournament.deleted_at', null);
+        $builder->where('game.deleted_at', null);
+        return $builder->get()->getResultArray(); // Récupère les résultats sous forme de tableau associatif
+    }
 }
