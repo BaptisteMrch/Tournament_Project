@@ -29,7 +29,6 @@
                     <td><a href="<?= base_url('/admin/tournament/' . $tournament['id']); ?>"> <i
                                 class="fa-solid fa-pen"></i></a></td>
                     <td>    <?= ($tournament['deleted_at'] === null) ?        "<a title='Désactiver le tournoi' href='" . base_url("admin/tournament/deactivate/{$tournament['id']}") . "'><i class='fa-solid fa-xl fa-toggle-on text-success'></i></a>" :        "<a title='Activer le tournoi' href='" . base_url("admin/tournament/activate/{$tournament['id']}") . "'><i class='fa-solid fa-toggle-off fa-xl text-danger'></i></a>";    ?></td>
-
                      </tr>
             <?php endforeach ?>
             </tbody>

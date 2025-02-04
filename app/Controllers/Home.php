@@ -10,6 +10,7 @@ class Home extends BaseController
     protected $require_auth = true;
 
     public function index()
+
     {
         return $this->view('/front/dashboard/index.php');
     }

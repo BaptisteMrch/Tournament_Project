@@ -6,7 +6,6 @@ use App\Controllers\BaseController;
 
 class Tournament extends BaseController
 {
-
     protected $require_auth = true;
     protected $requiredPermissions = ['administrateur'];
     protected $breadcrumb =  [['text' => 'Tableau de Bord','url' => '/admin/dashboard'],['text'=> 'Gestion des tournois', 'url' => '/admin/tournament']];
@@ -29,6 +28,7 @@ class Tournament extends BaseController
             if ($tournaments) {
                 $this->addBreadcrumb('Modification de ' . $tournament['name'], '');
                 return $this->view("/admin/tournament/tournament", ["tournament" => $tournament, "games" => $games, "participants" => $participants], true);
+
             } else {
                 $this->error("L'ID du tournois n'existe pas");
                 $this->redirect("/admin/tournament");
@@ -69,6 +69,7 @@ class Tournament extends BaseController
 
         // Vérifier si la création a réussi
         if ($newTournamentId) {
+
             $this->success("Le tournois à bien été ajouté.");
             $this->redirect("/admin/tournament");
         } else {
@@ -82,6 +83,7 @@ class Tournament extends BaseController
 
     public function getdelete($id){
         $tm = Model('tournamentModel');
+
         if ($tm->deleteTournament($id)) {
             $this->success("Tournois supprimé");
         } else {

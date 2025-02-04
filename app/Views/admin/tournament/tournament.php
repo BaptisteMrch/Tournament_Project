@@ -105,6 +105,7 @@
                     <?php endif; ?>
                     <button type="submit" class="btn btn-primary">
                         <?= isset($tournament) ? "Sauvegarder" : "Enregistrer" ?>
+
                     </button>
                 </div>
             </div>
