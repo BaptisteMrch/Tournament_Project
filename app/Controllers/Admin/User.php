@@ -3,6 +3,8 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use CodeIgniter\I18n\Time;
+
 class User extends BaseController
 {
     protected $require_auth = true;
@@ -182,5 +184,27 @@ class User extends BaseController
             'data'            => $data,
         ];
         return $this->response->setJSON($result);
+    }
+
+    public function getblacklist($id)
+    {
+        $bm = Model('BlacklistModel');
+        if ($bm->add_blacklist($id)) {
+            $this->success("Utilisateur banni");
+        } else {
+            $this->error("Utilisateur non banni");
+        }
+        $this->redirect('/admin/user');
+    }
+
+    public function getunblacklist($id)
+    {
+        $bm = Model('BlacklistModel');
+        if ($bm->unblacklist($id)) {
+            $this->success("Utilisateur débanni");
+        } else {
+            $this->error("Utilisateur non débanni");
+        }
+        $this->redirect('/admin/user');
     }
 }

@@ -15,10 +15,26 @@ class TableTournament extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
+            'name' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '100',
+            ],
+            'date_start' => [
+                'type'       => 'DATETIME',
+            ],
+            'date_end' => [
+                'type'       => 'DATETIME',
+            ],
+            'nb_player' => [
+                'type'       => 'INT',
+            ],
             'id_game' => [
                 'type'       => 'INT',
                 'unsigned'   => true,
-                'constraint'     => 11,
+            ],
+            'decount' => [
+                'type'       => 'INT',
+                'null'       => false,
             ],
             'created_at' => [
                 'type'       => 'DATETIME',

@@ -2,10 +2,10 @@
     <div class="sidebar-header border-bottom">
         <div class="sidebar-brand">
             <!--            gere le logo        -->
-            <a href="<?= base_url('/admin'); ?>"><img src="<?= base_url('/assets/brand/PPTournamentSLAM.svg'); ?>" class="sidebar-brand-full" _width="88"
+            <a href="<?= base_url('/'); ?>"><img src="<?= base_url('/assets/brand/PPTournamentSLAM.svg'); ?>" class="sidebar-brand-full" _width="88"
                                                       height="32"
                                                       alt="Mon Projet" /></a>
-            <a href="<?= base_url('/admin'); ?>"><img src="<?= base_url('/assets/brand/PPTournamentSLAM.svg'); ?>" class="sidebar-brand-narrow" _width="32"
+            <a href="<?= base_url('/'); ?>"><img src="<?= base_url('/assets/brand/PPTournamentSLAM.svg'); ?>" class="sidebar-brand-narrow" _width="32"
                                                       height="32"
                                                       alt="Mon Projet" /></a>
             SLAM
@@ -15,7 +15,7 @@
     <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
         <?php
         foreach ($menus as $km => $menu) {
-            if (isset($menu['admin']) && ! $user->isAdmin()) { continue; }
+            if (isset($menu['front']) && ! $user->isUser()) { continue; }
             if (isset($menu['require']) && ! $user->check($menu['require'])) { continue; }
             if (!isset($menu['subs'])) { ?>
                 <li class="nav-item <?= ($localmenu === $km ? 'active' : '') ?>"
@@ -35,7 +35,7 @@
                         <?php
                         foreach($menu['subs'] as $ksm => $smenu) {
 
-                            if (isset($smenu['admin']) && ! $user->isAdmin()) { continue; }
+                            if (isset($smenu['front']) && ! $user->isUser()) { continue; }
                             if (isset($smenu['require']) && ! $user->check($smenu['require'])) { continue; } ?>
                             <li class="nav-item ps-2" id="menu_<?= $ksm ?>"><a class="nav-link" href="<?= base_url($smenu['url']); ?>">
                                     <?php if (isset($smenu['icon'])) echo $smenu['icon']; ?>

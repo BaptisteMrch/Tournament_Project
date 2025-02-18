@@ -87,9 +87,10 @@ class UserModel extends Model
     // Relations avec les permissions
     public function getPermissions()
     {
-        return $this->join('user_permission', 'user.id_permission = user_permission.id')
-            ->select('user.*, user_permission.name as permission_name')
-            ->findAll();
+        $this->join('user_permission', 'user.id_permission = user_permission.id');
+        $this->join('blacklist_token', 'user.id = blacklist_token.user_id', 'left');
+        $this->select('user.*, user_permission.name as permission_name, blacklist_token.id as blacklistId ,blacklist_token.user_id as blacklistuser_id');
+        return $this->findAll();
     }
 
     public function getUserById($id)
@@ -202,6 +203,5 @@ class UserModel extends Model
 
         return $builder->countAllResults();
     }
-
 
 }
