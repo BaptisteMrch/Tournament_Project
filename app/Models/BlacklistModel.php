@@ -31,4 +31,19 @@ class BlacklistModel extends Model
         return $builder->delete();
     }
 
+    public function isBlacklisted($id)
+    {
+        $builder = $this->builder();
+        $builder->where('user_id', $id);
+        return $builder->countAllResults() > 0;
+    }
+
+    function addToBlacklistuser($userId)
+    {
+        return $this->insert([
+            'user_id' => $userId,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+    }
+
 }
