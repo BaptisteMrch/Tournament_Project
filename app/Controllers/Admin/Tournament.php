@@ -15,11 +15,11 @@ class Tournament extends BaseController
         $tournaments = Model("TournamentModel")->getTournamentsWithGameName();
         $tournament = Model("TournamentModel")->getTournamentById($id);
         $participants = Model("ParticipantModel")->getParticipantsByTournament($id);
-        //$nbParticipant = Model("ParticipantModel")->getTournamentsWithParticipants();
         $games = Model("GameModel")->getAllGames();
 
         if ($id == null) {
             return $this->view('/admin/tournament/index.php',["tournaments" => $tournaments, "games" => $games], true);
+
         } else {
             if ($id == "new") {
                 $this->addBreadcrumb('Création d\'un tournois','');
