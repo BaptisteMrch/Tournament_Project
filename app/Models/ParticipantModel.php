@@ -93,10 +93,10 @@ class ParticipantModel extends Model
         // Ajouter le nombre de participants pour chaque tournoi
         foreach ($tournaments as &$tournament) {
             // Compter les participants
-            $tournament['nb_participants'] = $this->countParticipants($tournament['id']);
+            $count = $this->countParticipants($tournament['id']);
         }
 
-        return $tournaments;
+        return $count;
     }
 
 }

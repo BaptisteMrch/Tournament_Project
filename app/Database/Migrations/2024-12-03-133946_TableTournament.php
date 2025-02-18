@@ -32,6 +32,11 @@ class TableTournament extends Migration
                 'type'       => 'INT',
                 'unsigned'   => true,
             ],
+            'decount' => [
+                'type'       => 'INT',
+                'null'       => false,
+
+            ],
             'created_at' => [
                 'type'       => 'DATETIME',
                 'null'       => true,

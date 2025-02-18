@@ -172,6 +172,7 @@ class UserSeeder extends Seeder
         ];
 
         // Insérer les données dans la table
-        $this->db->table('User')->insertBatch($data);
+        $this->db->table('user')->insertBatch($data);
+
     }
 }

@@ -6,6 +6,7 @@
                     <h4 class="card-title">
                         <?= isset($utilisateur) ? "Editer " . $utilisateur['username'] : "Créer un utilisateur" ?>
                     </h4>
+                    <div class=" d-flex justify-content-end align-items-center">
                     <?php
                     if (isset($utilisateur) && $utilisateur['deleted_at'] == null) { ?>
                         <a title="Désactiver l'utilisateur" href="<?= base_url('admin/user/deactivate/') . $utilisateur['id']; ?>">
@@ -19,6 +20,22 @@
                     <?php
                     }
                     ?>
+                    <?php
+                    if (isset($utilisateur) && $utilisateur['blacklistuser_id'] == null) { ?>
+                        <a title="Désactiver l'utilisateur"
+                           href="<?= base_url('admin/user/blacklist/') . $utilisateur['id']; ?>">
+                            <i class="fa-solid fa-xl fa-toggle-off text-success me-2 ms-2"></i>
+                        </a>
+                        <?php
+                    } elseif (isset($utilisateur)) { ?>
+                        <a title="Activer un utilisateur"
+                           href="<?= base_url('admin/user/unblacklist/') . $utilisateur['blacklistuser_id']; ?>">
+                            <i class="fa-solid fa-toggle-on fa-xl text-danger me-2 ms-2"></i>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                </div>
                 </div>
                 <div class="card-body">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">

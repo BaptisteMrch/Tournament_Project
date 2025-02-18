@@ -23,7 +23,7 @@
                     <td><?= $tournament['id']; ?></td>
                     <td><?= $tournament['name']; ?></td>
                     <td><?= $tournament['game_name']; ?></td>
-                    <td><?= $tournament['nb_participants']; ?>/<?= $tournament['nb_player']; ?></td>
+                    <td><?= $tournament['nb_player']; ?>/<?= $tournament['nb_player']; ?></td>
                     <td><?= $tournament['date_start']; ?></td>
                     <td><?= $tournament['date_end']; ?></td>
                     <td><a href="<?= base_url('/admin/tournament/' . $tournament['id']); ?>"> <i
