@@ -34,15 +34,11 @@ class School extends BaseController
     }
 
     public function postupdate() {
-        // Récupération des données envoyées via POST
-        $data = $this->request->getPost();
 
-        // Récupération du modèle UserModel
+        $data = $this->request->getPost();
         $sm = Model("SchoolModel");
 
-        // Mise à jour des informations utilisateur dans la base de données
         if ($sm->updateSchool($data['id'], $data)) {
-            // Si la mise à jour réussit
             $this->success("L'école a bien été modifié.");
         } else {
             $errors = $sm->errors();
@@ -50,8 +46,6 @@ class School extends BaseController
                 $this->error($error);
             }
         }
-
-        // Redirection vers la page des utilisateurs après le traitement
         return $this->redirect("/admin/school");
     }
 
@@ -60,11 +54,8 @@ class School extends BaseController
     public function postcreate() {
         $data = $this->request->getPost();
         $sm = Model("SchoolModel");
-
-        // Créer l'utilisateur et obtenir son ID
         $newSchoolId = $sm->createSchool($data);
 
-        // Vérifier si la création a réussi
         if ($newSchoolId) {
             $this->success("L'école à bien été ajouté.");
             $this->redirect("/admin/school");
@@ -77,6 +68,25 @@ class School extends BaseController
         }
     }
 
+    public function getdeactivate($id){
+        $um = Model('SchoolModel');
+        if ($um->deleteSchool($id)) {
+            $this->success("École désactivé");
+        } else {
+            $this->error("École non désactivé");
+        }
+        $this->redirect('/admin/school');
+    }
+
+    public function getactivate($id){
+        $um = Model('schoolModel');
+        if ($um->activateSchool($id)) {
+            $this->success("École activé");
+        } else {
+            $this->error("École non activé");
+        }
+        $this->redirect('/admin/school');
+    }
 
     /**
      * Renvoie pour la requete Ajax les stocks fournisseurs rechercher par SKU ( LIKE )
@@ -115,25 +125,5 @@ class School extends BaseController
             'data'            => $data,
         ];
         return $this->response->setJSON($result);
-    }
-
-    public function getdeactivate($id){
-        $um = Model('SchoolModel');
-        if ($um->deleteSchool($id)) {
-            $this->success("École désactivé");
-        } else {
-            $this->error("École non désactivé");
-        }
-        $this->redirect('/admin/school');
-    }
-
-    public function getactivate($id){
-        $um = Model('schoolModel');
-        if ($um->activateSchool($id)) {
-            $this->success("École activé");
-        } else {
-            $this->error("École non activé");
-        }
-        $this->redirect('/admin/school');
     }
 }

@@ -114,7 +114,7 @@ class TournamentModel extends Model
     public function getTournamentsWithGameName()
     {
         $builder = $this->db->table('tournament');
-        $builder->select('tournament.*, game.name as game_name');
+        $builder->select('tournament.*, game.name as game_name, (tournament.nb_player - tournament.max_players) AS remaining_spots');
         $builder->join('game', 'game.id = tournament.id_game', 'left'); // Jointure entre tournament et game
         return $builder->get()->getResultArray(); // Récupère les résultats sous forme de tableau associatif
     }

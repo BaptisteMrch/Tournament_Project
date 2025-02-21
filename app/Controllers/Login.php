@@ -37,10 +37,8 @@ class Login extends BaseController
     public function getregister() {
         $flashData = session()->getFlashdata('data');
 
-        // Préparer les données à passer à la vue
         $data = [
             'errors' => $flashData['errors'] ?? null,
-            // Autres données à passer à la vue
         ];
         return view('/login/register',$data);
     }

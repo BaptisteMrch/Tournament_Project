@@ -22,11 +22,10 @@ class Tournament extends BaseController
     public function getregister()
     {
         $pm = Model("ParticipantModel");
-
         $id_tournament = $this->request->getGet('id_tournament');
         $id_user = $this->request->getGet('id_user');
-
         $newParticipantId = $pm->insertParticipant($id_tournament, $id_user);
+
         if ($newParticipantId) {
             $this->success("Le participant à bien été inscrit au tournoi");
             $this->redirect('/tournament');
@@ -42,7 +41,6 @@ class Tournament extends BaseController
     public function getunregister()
     {
         $pm = Model("ParticipantModel");
-
         $id_tournament = $this->request->getGet('id_tournament');
         $id_user = $this->request->getGet('id_user');
 

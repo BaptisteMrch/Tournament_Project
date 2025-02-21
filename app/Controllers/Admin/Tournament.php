@@ -37,15 +37,11 @@ class Tournament extends BaseController
     }
 
     public function postupdate() {
-        // Récupération des données envoyées via POST
-        $data = $this->request->getPost();
 
-        // Récupération du modèle TournamentModel
+        $data = $this->request->getPost();
         $tm = Model("TournamentModel");
 
-        // Mise à jour des informations tournoi dans la base de données
         if ($tm->updateTournament($data['id'], $data)) {
-            // Si la mise à jour réussit
             $this->success("Le tournois a bien été modifié.");
         } else {
             $errors = $tm->errors();
@@ -53,23 +49,15 @@ class Tournament extends BaseController
                 $this->error($error);
             }
         }
-
-        // Redirection vers la page des utilisateurs après le traitement
         return $this->redirect("/admin/tournament");
     }
-
-
 
     public function postcreate() {
         $data = $this->request->getPost();
         $tm = Model("tournamentModel");
-
-        // Créer le tournoi et obtenir son ID
         $newTournamentId = $tm->createTournament($data);
 
-        // Vérifier si la création a réussi
         if ($newTournamentId) {
-
             $this->success("Le tournois à bien été ajouté.");
             $this->redirect("/admin/tournament");
         } else {
@@ -94,7 +82,6 @@ class Tournament extends BaseController
 
     public function getdeleteparticipant() {
         $tm = model('ParticipantModel');
-
         $id_user = $this->request->getGet('id_user');
         $id_tournament = $this->request->getGet('id_tournament');
 
@@ -105,7 +92,6 @@ class Tournament extends BaseController
         }
         $this->redirect('/admin/tournament');
     }
-
 
     public function getdeactivate($id){
         $tm = Model('TournamentModel');
