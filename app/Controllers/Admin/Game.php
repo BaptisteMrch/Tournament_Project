@@ -34,15 +34,11 @@ class Game extends BaseController
     }
 
     public function postupdate() {
-        // Récupération des données envoyées via POST
-        $data = $this->request->getPost();
 
-        // Récupération du modèle UserModel
+        $data = $this->request->getPost();
         $gm = Model("GameModel");
 
-        // Mise à jour des informations utilisateur dans la base de données
         if ($gm->updateGame($data['id'], $data)) {
-            // Si la mise à jour réussit
             $this->success("Le jeu a bien été modifié.");
         } else {
             $errors = $gm->errors();
@@ -50,8 +46,6 @@ class Game extends BaseController
                 $this->error($error);
             }
         }
-
-        // Redirection vers la page des utilisateurs après le traitement
         return $this->redirect("/admin/game");
     }
 
@@ -60,12 +54,9 @@ class Game extends BaseController
     public function postcreate() {
         $data = $this->request->getPost();
         $gm = Model("GameModel");
+        $newGameId = $gm->createGame($data);
 
-        // Créer l'utilisateur et obtenir son ID
-        $newSchoolId = $gm->createGame($data);
-
-        // Vérifier si la création a réussi
-        if ($newSchoolId) {
+        if ($newGameId) {
             $this->success("Le jeu à bien été ajouté.");
             $this->redirect("/admin/game");
         } else {
@@ -87,12 +78,26 @@ class Game extends BaseController
         $this->redirect('/admin/game');
     }
 
+    public function getdeactivate($id){
+        $gm = Model('GameModel');
+        if ($gm->deleteGame($id)) {
+            $this->success("Jeu désactivé");
+        } else {
+            $this->error("Jeu non désactivé");
+        }
+        $this->redirect('/admin/game');
+    }
 
-    /**
-     * Renvoie pour la requete Ajax les stocks fournisseurs rechercher par SKU ( LIKE )
-     *
-     * @return \CodeIgniter\HTTP\ResponseInterface
-     */
+    public function getactivate($id){
+        $gm = Model('GameModel');
+        if ($gm->activateGame($id)) {
+            $this->success("Jeu activé");
+        } else {
+            $this->error("Jeu non activé");
+        }
+        $this->redirect('/admin/game');
+    }
+
     public function postSearchGame()
     {
         $gm = model('GameModel');
@@ -125,25 +130,5 @@ class Game extends BaseController
             'data'            => $data,
         ];
         return $this->response->setJSON($result);
-    }
-
-    public function getdeactivate($id){
-        $gm = Model('GameModel');
-        if ($gm->deleteGame($id)) {
-            $this->success("Jeu désactivé");
-        } else {
-            $this->error("Jeu non désactivé");
-        }
-        $this->redirect('/admin/game');
-    }
-
-    public function getactivate($id){
-        $gm = Model('GameModel');
-        if ($gm->activateGame($id)) {
-            $this->success("Jeu activé");
-        } else {
-            $this->error("Jeu non activé");
-        }
-        $this->redirect('/admin/game');
     }
 }

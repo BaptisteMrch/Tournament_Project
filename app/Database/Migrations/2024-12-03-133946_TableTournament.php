@@ -28,6 +28,9 @@ class TableTournament extends Migration
             'nb_player' => [
                 'type'       => 'INT',
             ],
+            'max_players' => [
+                'type'       => 'INT',
+            ],
             'id_game' => [
                 'type'       => 'INT',
                 'unsigned'   => true,

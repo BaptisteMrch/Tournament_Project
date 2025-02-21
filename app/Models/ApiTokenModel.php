@@ -17,4 +17,13 @@ class ApiTokenModel extends Model
     {
         $this->where('user_id', $userId)->set('counter', 'counter - 1', false)->update();
     }
+
+    public function updateAllCounters($newCounter)
+    {
+        if ($newCounter === null) {
+            return $this->set(['counter' => null])->where('id >', 0)->update();
+        }
+        return $this->set(['counter' => $newCounter])->where('id >', 0)->update();
+    }
+
 }
