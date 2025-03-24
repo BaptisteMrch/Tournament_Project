@@ -79,12 +79,3 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }} 
         password: ${{ secrets.FTP_PASSWORD }} 
         server-dir: ${{ secrets.URL_PREFIX }}/ 
- 
-    - name: Generate version file 
-      run: | 
-        VERSION=$(git describe --tags --abbrev=0) 
-        BRANCH=$(git rev-parse --abbrev-ref HEAD) 
-        COMMIT=$(git rev-parse --short HEAD) 
-        TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S') 
-        echo "{ \"version\": \"$VERSION\", \"branch\": \"$BRANCH\", \"commit\": \"$COMMIT\", \"timestamp\": 
-\"$TIMESTAMP\" }" > version.json 
