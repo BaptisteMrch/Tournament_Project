@@ -27,9 +27,9 @@ class Database extends Config
     public array $production = [
         'DSN'          => '',
         'hostname'     => 'localhost',
-        'username'     => '',
-        'password'     => '',
-        'database'     => '',
+        'username'     => 'vipa0880_mbaptiste',
+        'password'     => '3B=ceQ,a3Kv(',
+        'database'     => 'vipa0880_mbaptiste',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
         'pConnect'     => false,
