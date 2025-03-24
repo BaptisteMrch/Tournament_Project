@@ -12,7 +12,7 @@
     "perm": "none",
     "icon": "<i class=\"nav-icon fa-solid fa-trophy\"></i>",
     "class": "main-menu-accueil"
-    },
+  },
   "game": {
     "title": "Jeux",
     "url": "/game",

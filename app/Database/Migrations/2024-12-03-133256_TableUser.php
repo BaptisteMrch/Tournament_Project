@@ -63,6 +63,12 @@ class TableUser extends Migration
                 'default'   => 3,
                 'null'       => false,
             ],
+            'total_point' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+                'default'   => 100,
+                'null'       => false,
+            ],
             'created_at' => [
                 'type'       => 'DATETIME',
                 'null'       => true,
