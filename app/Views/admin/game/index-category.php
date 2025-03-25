@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h4>Liste des Catégories</h4>
-        <a href="<?= base_url('/admin/CategoryGame/new'); ?>"><i class="fa-solid fa-plus"></i></a>
+        <a href="<?= base_url('/admin/Categorygame/new'); ?>"><i class="fa-solid fa-plus"></i></a>
     </div>
     <div class="card-body">
         <table class="table table-hover">
@@ -21,10 +21,10 @@
                     <td><?= $category['name']; ?></td>
                     <td><?= $category['slug']; ?></td>
                     <td>
-                        <a href="<?= base_url('/admin/CategoryGame/'. $category['id']); ?>"> <i class="fa-solid fa-pen" style="color: green"></i>
+                        <a href="<?= base_url('/admin/Categorygame/'. $category['id']); ?>"> <i class="fa-solid fa-pen" style="color: green"></i>
                     </td>
                     <td>
-                        <a href="<?= base_url('/admin/CategoryGame/delete/'. $category['id']); ?>" class="delete">
+                        <a href="<?= base_url('/admin/Categorygame/delete/'. $category['id']); ?>" class="delete">
                             <i class="fa-solid fa-trash" style="color: red"></i>
                         </a>
                     </td>

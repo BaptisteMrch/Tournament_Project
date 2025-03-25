@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h4>Liste des Ecoles</h4>
-        <a href="<?= base_url('/admin/CategorySchool/new'); ?>"><i class="fa-solid fa-plus"></i></a>
+        <a href="<?= base_url('/admin/Categoryschool/new'); ?>"><i class="fa-solid fa-plus"></i></a>
     </div>
     <div class="card-body">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -29,10 +29,10 @@
                     <td><?= $category['name']; ?></td>
                     <td><?= $category['slug']; ?></td>
                     <td>
-                        <a href="<?= base_url('/admin/CategorySchool/'. $category['id']); ?>"> <i class="fa-solid fa-pen" style="color: green"></i>
+                        <a href="<?= base_url('/admin/Categoryschool/'. $category['id']); ?>"> <i class="fa-solid fa-pen" style="color: green"></i>
                     </td>
                     <td>
-                        <a href="<?= base_url('/admin/CategorySchool/delete/'. $category['id']); ?>" class="delete">
+                        <a href="<?= base_url('/admin/Categoryschool/delete/'. $category['id']); ?>" class="delete">
                             <i class="fa-solid fa-trash" style="color: red"></i>
                         </a>
                     </td>

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col">
-        <form action="<?= isset($category) ? base_url("/admin/CategoryGame/update") : base_url("/admin/CategoryGame/create") ?>"
+        <form action="<?= isset($category) ? base_url("/admin/Categorygame/update") : base_url("/admin/Categorygame/create") ?>"
               method="POST" enctype="multipart/form-data">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">

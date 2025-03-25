@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 
-class CategorySchool extends BaseController
+class Categoryschool extends BaseController
 {
     protected $require_auth = true;
     protected $requiredPermissions = ['administrateur'];
@@ -33,7 +33,7 @@ class CategorySchool extends BaseController
         } else {
             $this->error("Une erreur est survenue");
         }
-        $this->redirect("/admin/CategorySchool");
+        $this->redirect("/admin/Categoryschool");
     }
 
     public function postcreate() {
@@ -41,13 +41,13 @@ class CategorySchool extends BaseController
         $scm = Model("CategorySchoolModel");
         if ($scm->createSchoolCategory($data)) {
             $this->success("La catégorie à bien été ajouté.");
-            $this->redirect("/admin/CategorySchool");
+            $this->redirect("/admin/Categoryschool");
         } else {
             $errors = $scm->errors();
             foreach ($errors as $error) {
                 $this->error($error);
             }
-            $this->redirect("/admin/CategorySchool/new");
+            $this->redirect("/admin/Categoryschool/new");
         }
     }
 
@@ -58,7 +58,7 @@ class CategorySchool extends BaseController
         } else {
             $this->error("Catégorie non supprimé");
         }
-        $this->redirect('/admin/CategorySchool');
+        $this->redirect('/admin/Categoryschool');
     }
 
     public function postSearchPermission()
