@@ -9,28 +9,30 @@
                     <div class=" d-flex justify-content-end align-items-center">
                     <?php
                     if (isset($utilisateur) && $utilisateur['deleted_at'] == null) { ?>
+                            Désactiver l'utilisateur
                         <a title="Désactiver l'utilisateur" href="<?= base_url('admin/user/deactivate/') . $utilisateur['id']; ?>">
-                            <i class="fa-solid fa-xl fa-toggle-on text-success"></i>
+                            <i class="fa-solid fa-xl fa-toggle-on text-success me-5 ms-2"></i>
                         </a>
                     <?php
                     } elseif(isset($utilisateur)) { ?>
                         <a title="Activer un utilisateur"href="<?= base_url('admin/user/activate/') . $utilisateur['id']; ?>">
-                            <i class="fa-solid fa-toggle-off fa-xl text-danger"></i>
+                            <i class="fa-solid fa-toggle-off fa-xl text-danger me-5 ms-2"></i>
                         </a>
                     <?php
                     }
                     ?>
                     <?php
                     if (isset($utilisateur) && $utilisateur['blacklistuser_id'] == null) { ?>
-                        <a title="Désactiver l'utilisateur"
+                            Bannir l'utilisateur
+                        <a title="Bannir l'utilisateur"
                            href="<?= base_url('admin/user/blacklist/') . $utilisateur['id']; ?>">
-                            <i class="fa-solid fa-xl fa-toggle-off text-success me-2 ms-2"></i>
+                            <i class="fa-solid fa-xl fa-toggle-off text-success me-5 ms-2"></i>
                         </a>
                         <?php
                     } elseif (isset($utilisateur)) { ?>
-                        <a title="Activer un utilisateur"
+                        <a title="Débannir un utilisateur"
                            href="<?= base_url('admin/user/unblacklist/') . $utilisateur['blacklistuser_id']; ?>">
-                            <i class="fa-solid fa-toggle-on fa-xl text-danger me-2 ms-2"></i>
+                            <i class="fa-solid fa-toggle-on fa-xl text-danger me-5 ms-2"></i>
                         </a>
                         <?php
                     }
