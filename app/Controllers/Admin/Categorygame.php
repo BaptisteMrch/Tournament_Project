@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 
-class CategoryGame extends BaseController
+class Categorygame extends BaseController
 {
     protected $require_auth = true;
     protected $requiredPermissions = ['administrateur'];
@@ -33,7 +33,7 @@ class CategoryGame extends BaseController
         } else {
             $this->error("Une erreur est survenue");
         }
-        $this->redirect("/admin/CategoryGame");
+        $this->redirect("/admin/Categorygame");
     }
 
     public function postcreate() {
@@ -41,13 +41,13 @@ class CategoryGame extends BaseController
         $gcm = Model("CategoryGameModel");
         if ($gcm->createGameCategory($data)) {
             $this->success("La catégorie à bien été ajouté.");
-            $this->redirect("/admin/CategoryGame");
+            $this->redirect("/admin/Categorygame");
         } else {
             $errors = $gcm->errors();
             foreach ($errors as $error) {
                 $this->error($error);
             }
-            $this->redirect("/admin/CategoryGame/new");
+            $this->redirect("/admin/Categorygame/new");
         }
     }
 
@@ -58,7 +58,7 @@ class CategoryGame extends BaseController
         } else {
             $this->error("Catégorie non supprimé");
         }
-        $this->redirect('/admin/CategoryGame');
+        $this->redirect('/admin/Categorygame');
     }
 
     public function postSearchPermission()
