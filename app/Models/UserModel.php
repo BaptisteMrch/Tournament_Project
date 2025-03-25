@@ -95,8 +95,9 @@ class UserModel extends Model
 
     public function getUserById($id)
     {
-        $this->select('user.*, media.file_path as avatar_url');
+        $this->select('user.*, media.file_path as avatar_url, blacklist_token.user_id as blacklistuser_id');
         $this->join('media', 'user.id = media.entity_id AND media.entity_type = "user"', 'left');
+        $this->join('blacklist_token', 'user.id = blacklist_token.user_id', 'left');
         return $this->find($id);
     }
     public function getAllUsers()
