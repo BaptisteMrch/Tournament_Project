@@ -1,17 +1,9 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h4>Liste des Ecoles</h4>
+        <h4>Liste des Catégories</h4>
         <a href="<?= base_url('/admin/Categoryschool/new'); ?>"><i class="fa-solid fa-plus"></i></a>
     </div>
     <div class="card-body">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="onglet-tab" data-bs-toggle="tab"
-                        data-bs-target="#onglet" type="button" role="tab" aria-controls="onglet"
-                        aria-selected="false">Catégories
-                </button>
-            </li>
-        </ul>
         <table class="table table-hover">
             <thead>
             <tr>
