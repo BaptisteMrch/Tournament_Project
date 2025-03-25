@@ -8,18 +8,17 @@ class App extends BaseConfig
 {
     /**
      * --------------------------------------------------------------------------
-     * Base Site URL
-     * --------------------------------------------------------------------------
+     *  Base Site URL
+     *  --------------------------------------------------------------------------
      *
      * URL to your CodeIgniter root. Typically, this will be your base URL,
      * WITH a trailing slash:
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = 'http://localhost:8080/';
-
+    public string $baseURL = 'http://localhost';
     /**
-     * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
+     è_é-)"'(çà& è_-' * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
      * If you want to accept multiple Hostnames, set this.
      *
      * E.g.,
