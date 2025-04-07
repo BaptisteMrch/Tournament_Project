@@ -94,8 +94,7 @@ class Login extends ResourceController
             return $this->response->setJSON(['token' => $apiToken['token']]);
         } else {
             // Si aucun token n'existe, utiliser la fonction gettoken pour le générer
-            $newToken = $this->gettoken($user['id']);
-            return $this->response->setJSON(['token' => $newToken]);
+            return $this->gettoken($user['id']);
         }
     }
 
