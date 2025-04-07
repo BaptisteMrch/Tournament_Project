@@ -90,7 +90,25 @@
                                 <span class="input-group-text">
                                     <i class="fa-solid fa-user"></i>
                                 </span>
+                                <input class="form-control" type="text" placeholder="Nom" name="name" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-user"></i>
+                                </span>
+                                <input class="form-control" type="text" placeholder="Prénom" name="firstname" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-user"></i>
+                                </span>
                                 <input class="form-control" type="text" placeholder="Pseudo" name="username" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-user"></i>
+                                </span>
+                                <input class="form-control" type="text" placeholder="Biographie" name="bio" required>
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">
