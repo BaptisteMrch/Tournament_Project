@@ -48,13 +48,13 @@ class Login extends ResourceController
         return $this->respond(['token' => $token], 200);
     }
 
-    public function getlogin()
+    public function postlogin()
     {
         $userModel = Model('UserModel');
         $blacklistModel = Model('BlacklistModel');
 
-        $email = $this->request->getGet('email');
-        $password = $this->request->getGet('password');
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
 
         // Récupération de l'utilisateur
         $user = $userModel->where('email', $email)->first();
@@ -94,8 +94,7 @@ class Login extends ResourceController
             return $this->response->setJSON(['token' => $apiToken['token']]);
         } else {
             // Si aucun token n'existe, utiliser la fonction gettoken pour le générer
-            $newToken = $this->gettoken($user['id']);
-            return $this->response->setJSON(['token' => $newToken]);
+            return $this->gettoken($user['id']);
         }
     }
 
