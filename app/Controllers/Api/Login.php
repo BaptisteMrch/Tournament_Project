@@ -48,13 +48,13 @@ class Login extends ResourceController
         return $this->respond(['token' => $token], 200);
     }
 
-    public function getlogin()
+    public function postlogin()
     {
         $userModel = Model('UserModel');
         $blacklistModel = Model('BlacklistModel');
 
-        $email = $this->request->getGet('email');
-        $password = $this->request->getGet('password');
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
 
         // Récupération de l'utilisateur
         $user = $userModel->where('email', $email)->first();
