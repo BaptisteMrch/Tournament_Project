@@ -27,7 +27,12 @@ class Login extends BaseController
                 return view('/login/login');
             }
             $this->session->set('user', $user);
-            return $this->redirect('/');
+
+            if ($user->getPermissionSlug() === 'administrateur') {
+                return $this->redirect('/admin');
+            } else {
+                return $this->redirect('/');
+            }
         } else {
             // Gérer l'échec de l'authentification
             return view('/login/login');
@@ -47,7 +52,10 @@ class Login extends BaseController
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
         $username = $this->request->getPost('username');
-        $data = ['username' => $username, 'email' => $email, 'password' => $password, 'id_permission' => 3];
+        $bio = $this->request->getPost('bio');
+        $name = $this->request->getPost('name');
+        $firstname = $this->request->getPost('firstname');
+        $data = ['username' => $username, 'email' => $email, 'password' => $password, 'id_permission' => 3, 'bio' => $bio, 'name' => $name, 'firstname' => $firstname];
         $um = Model('UserModel');
         if (!$um->createUser($data)) {
             $errors = $um->errors();

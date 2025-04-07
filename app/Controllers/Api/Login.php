@@ -48,13 +48,13 @@ class Login extends ResourceController
         return $this->respond(['token' => $token], 200);
     }
 
-    public function postlogin()
+    public function getlogin()
     {
         $userModel = Model('UserModel');
         $blacklistModel = Model('BlacklistModel');
 
-        $email = $this->request->getPost('email');
-        $password = $this->request->getPost('password');
+        $email = $this->request->getGet('email');
+        $password = $this->request->getGet('password');
 
         // Récupération de l'utilisateur
         $user = $userModel->where('email', $email)->first();
@@ -94,8 +94,50 @@ class Login extends ResourceController
             return $this->response->setJSON(['token' => $apiToken['token']]);
         } else {
             // Si aucun token n'existe, utiliser la fonction gettoken pour le générer
-            return $this->gettoken($user['id']);
+            $newToken = $this->gettoken($user['id']);
+            return $this->response->setJSON(['token' => $newToken]);
         }
+    }
+
+    public function postregister()
+    {
+        $userModel = Model('UserModel');
+
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+        $username = $this->request->getPost('username');
+        $bio = $this->request->getPost('bio');
+        $firstname = $this->request->getPost('firstname');
+        $name = $this->request->getPost('name');
+
+        // Vérifier si l'email existe déjà
+        if ($userModel->where('email', $email)->first()) {
+            return $this->response->setJSON(['message' => 'Cet email est déjà utilisé'])->setStatusCode(400);
+        }
+
+        // Hash du mot de passe
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+        $data = [
+            'email' => $email,
+            'password' => $hashedPassword,
+            'username' => $username,
+            'bio' => $bio,
+            'firstname' => $firstname,
+            'name' => $name,
+            'id_permission' => 3,
+            'counter_user' => 3
+        ];
+
+        if (!$userModel->insert($data)) {
+            return $this->response->setJSON(['errors' => $userModel->errors()])->setStatusCode(400);
+        }
+
+        // Récupérer l'utilisateur nouvellement inscrit
+        $user = $userModel->where('email', $email)->first();
+
+        // Générer un token pour l'utilisateur
+        return $this->gettoken($user['id']);
     }
 
     public function postsetRequestLimit()
