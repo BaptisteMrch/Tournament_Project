@@ -11,39 +11,49 @@ class Login extends ResourceController
     {
         $data = $this->request->getGet();
 
-        if (!isset($data['force_regenerate'])) {
-            $data['force_regenerate'] = false;
-        }
+        // Déterminer si une régénération forcée est demandée
+        $forceRegenerate = isset($data['force_regenerate']) && $data['force_regenerate'];
 
+        // Récupérer l'utilisateur
         if ($userId !== null) {
             $um = Model('UserModel');
             $user = $um->find($userId);
-        } // Sinon, utiliser mail + password pour vérifier l'utilisateur
-        else if (isset($data['mail']) && isset($data['password'])) {
+        } else if (isset($data['mail']) && isset($data['password'])) {
             $um = Model('UserModel');
             $user = $um->verifyLogin($data['mail'], $data['password']);
         } else {
             return $this->respond(["message" => "Erreur, identifiant ou mot de passe manquant"], 400);
         }
 
-        // Vérifier que l'utilisateur existe
         if (!isset($user['id'])) {
             return $this->respond(["message" => "Erreur, identifiant ou mot de passe incorrect"], 401);
         }
 
         // Vérifier si l'utilisateur est blacklisté
         $bm = Model('BlacklistModel');
-        $isBlacklisted = $bm->where('user_id', $user['id'])->first();
-        if ($isBlacklisted) {
+        if ($bm->where('user_id', $user['id'])->first()) {
             return $this->respond(["message" => "Utilisateur bloqué, impossible de générer un jeton"], 403);
         }
 
-        // Supprimer l'ancien token s'il existe
         $atm = Model('ApiTokenModel');
-        $atm->where('user_id', $user['id'])->delete();
+        $existingToken = $atm->where('user_id', $user['id'])->first();
 
-        // Générer un nouveau token
-        $token = generateToken($user['id'], $data['force_regenerate']);
+        // Vérifier expiration si token existant
+        if (!$forceRegenerate && $existingToken) {
+            $expiration = strtotime($existingToken['expiration']);
+            if ($expiration > time()) {
+                // Token encore valide, on le retourne
+                return $this->respond(['token' => $existingToken['token']], 200);
+            }
+        }
+
+        // Supprimer l'ancien token s'il existe
+        if ($existingToken) {
+            $atm->delete($existingToken['id']);
+        }
+
+        // Générer et sauvegarder un nouveau token
+        $token = generateToken($user['id'], true);
 
         return $this->respond(['token' => $token], 200);
     }
